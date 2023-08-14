@@ -99,6 +99,8 @@ class CoursePublishedSink(BaseSink):
         course_key = item.scope_ids.usage_id.course_key
         block_type = item.scope_ids.block_type
 
+        print('dumping course information')
+
         # Extra data not needed for the table to function, things can be
         # added here without needing to rebuild the whole table.
         json_data = {
@@ -107,7 +109,6 @@ class CoursePublishedSink(BaseSink):
             'block_type': block_type,
             'detached': 1 if block_type in detached_xblock_types else 0,
             'graded': getattr(item, 'graded'),
-            'other': item.fields.items(),
         }
 
         # Core table data, if things change here it's a big deal.
